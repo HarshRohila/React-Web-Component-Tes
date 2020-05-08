@@ -1,5 +1,5 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import WComp from './web-components/web-comp/WebCompElement';
 import WebCompChildElement from './web-components/web-comp-child/WebCompChildElement';
 
