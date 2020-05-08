@@ -9,7 +9,10 @@ class WebComp extends React.Component<{config: any}>{
   
   render() {
     console.log('render called', this.props.config);
-    return <h2>Hi, I am inside Web Component!</h2>;
+    return <>
+      <h2>Hi, I am inside Web Component!</h2>
+      <p>{this.props.config}</p>
+    </>; 
   }
 
   componentWillUnmount() {

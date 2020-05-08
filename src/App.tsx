@@ -1,54 +1,30 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
-import ReactDOM from 'react-dom';
 import './App.css';
-import WebComp from './components/WebComp';
+import WComp from './web-components/web-comp/WebCompElement';
 
-class WComp extends HTMLElement {
-
-  config: any;
-
-  connectedCallback() {
-    this.render();
-  }
-
-  render() {
-    ReactDOM.render(
-      <React.StrictMode>
-        <WebComp config={this.config}/>
-      </React.StrictMode>,
-      this
-    );
-  }
-
-  set prop(prop: any) {
-    console.log('got it', prop);
-    this.config = prop;
-    this.render();
-  }
-
-  disconnectedCallback() {
-    ReactDOM.unmountComponentAtNode(this);
+declare global {
+  namespace JSX {
+      interface IntrinsicElements {
+      'web-comp': any;
+      }
   }
 }
 customElements.define('web-comp', WComp);
 
-declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      'web-comp': any;
-    }
-  }
-}
-
 function App() {
 
   const [key, setKey] = useState(0);
-  const webCompRef = useRef(null);
+  const webCompRef = useRef<WComp>(null);
 
   useEffect(() => {
     console.log(webCompRef);
       const wc = webCompRef.current;
-      wc && ((wc as WComp).prop = 'config data');
+
+      let count = 2;
+      setInterval(() => {
+        wc && ((wc as WComp).prop = 'config data' + count++);
+      }, 2000);
+
   });
 
   return (
