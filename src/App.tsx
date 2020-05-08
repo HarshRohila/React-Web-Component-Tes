@@ -1,25 +1,61 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Fragment, useState, useRef, useEffect } from 'react';
+import ReactDOM from 'react-dom';
 import './App.css';
+import WebComp from './components/WebComp';
+
+class WComp extends HTMLElement {
+
+  config: any;
+
+  connectedCallback() {
+    this.render();
+  }
+
+  render() {
+    ReactDOM.render(
+      <React.StrictMode>
+        <WebComp config={this.config}/>
+      </React.StrictMode>,
+      this
+    );
+  }
+
+  set prop(prop: any) {
+    console.log('got it', prop);
+    this.config = prop;
+    this.render();
+  }
+
+  disconnectedCallback() {
+    ReactDOM.unmountComponentAtNode(this);
+  }
+}
+customElements.define('web-comp', WComp);
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'web-comp': any;
+    }
+  }
+}
 
 function App() {
+
+  const [key, setKey] = useState(0);
+  const webCompRef = useRef(null);
+
+  useEffect(() => {
+    console.log(webCompRef);
+      const wc = webCompRef.current;
+      wc && ((wc as WComp).prop = 'config data');
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Fragment>
+      <button onClick={() => setKey(key + 1)}>Refresh</button>
+      <web-comp ref={webCompRef} key={key}></web-comp>
+    </Fragment>
   );
 }
 
