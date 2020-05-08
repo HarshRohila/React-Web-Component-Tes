@@ -12,6 +12,7 @@ class WebComp extends React.Component<{config: any}>{
     return <>
       <h2>Hi, I am inside Web Component!</h2>
       <p>{this.props.config}</p>
+      <web-comp-child></web-comp-child>
     </>; 
   }
 

@@ -1,15 +1,18 @@
 import React, { Fragment, useState, useRef, useEffect } from 'react';
 import './App.css';
 import WComp from './web-components/web-comp/WebCompElement';
+import WebCompChildElement from './web-components/web-comp-child/WebCompChildElement';
 
 declare global {
   namespace JSX {
       interface IntrinsicElements {
-      'web-comp': any;
+        'web-comp': any;
+        'web-comp-child': any;
       }
   }
 }
 customElements.define('web-comp', WComp);
+customElements.define('web-comp-child', WebCompChildElement);
 
 function App() {
 
