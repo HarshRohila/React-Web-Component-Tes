@@ -6,16 +6,23 @@ import '@webcomponents/custom-elements';
 export default class WComp extends HTMLElement {
     config: any;
 
+    private mountPoint!: HTMLDivElement;
+
     connectedCallback() {
         this.render();
     }
 
     render() {
+        if (!this.mountPoint) {
+            this.mountPoint = document.createElement('div');
+            this.attachShadow({ mode: 'open' }).appendChild( this.mountPoint );
+        }
+
         ReactDOM.render(
             <React.StrictMode>
                 <WebComp config={this.config}/>
             </React.StrictMode>,
-            this
+            this.mountPoint
         );
     }
 
@@ -26,6 +33,6 @@ export default class WComp extends HTMLElement {
     }
 
     disconnectedCallback() {
-        ReactDOM.unmountComponentAtNode(this);
+        ReactDOM.unmountComponentAtNode( this.mountPoint );
     }
 }
