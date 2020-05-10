@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom';
 import React from 'react';
 import WebCompChild from './WebCompChild';
 import '@webcomponents/custom-elements';
+import '@webcomponents/webcomponentsjs';
 
 export default class WebCompChildElement extends HTMLElement {
     config: any;
