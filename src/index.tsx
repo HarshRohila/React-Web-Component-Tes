@@ -3,7 +3,11 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {makeServer} from './mirage/main';
 
+if (process.env.NODE_ENV === "development") {
+  makeServer()
+}
 ReactDOM.render(
   <React.StrictMode>
     <App />
