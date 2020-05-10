@@ -2,7 +2,8 @@ import React, { Fragment, useState, useRef, useEffect } from 'react';
 import './App.scss';
 import WComp from './web-components/web-comp/WebCompElement';
 import WebCompChildElement from './web-components/web-comp-child/WebCompChildElement';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 declare global {
   namespace JSX {
       interface IntrinsicElements {
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <Fragment>
+      <FontAwesomeIcon icon={faCoffee} />
       <button onClick={() => setKey(key + 1)}>Refresh</button>
       <web-comp ref={webCompRef} key={key}></web-comp>
     </Fragment>
