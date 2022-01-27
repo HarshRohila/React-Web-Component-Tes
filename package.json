@@ -21,7 +21,7 @@
     "react-scripts": "3.4.1",
     "rewire": "^5.0.0",
     "style-it": "^2.1.4",
-    "three": "^0.116.1",
+    "three": "^0.137.0",
     "typescript": "^3.7.5"
   },
   "scripts": {
